@@ -1,11 +1,15 @@
 package com.example.assignment.ui.main.viewmodel
 
-import android.content.Context
+import android.text.TextUtils
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.example.assignment.R
 import com.example.assignment.data.repository.MainRepository
+import com.example.assignment.ui.main.view.activity.MainActivity
 import com.example.assignment.utils.Constants
 import com.example.assignment.utils.Resource
+import com.example.assignment.utils.Status
+import com.example.assignment.utils.Utils
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +18,7 @@ import kotlinx.coroutines.Dispatchers
 class PostViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
 
-    fun getPostData(context: Context) =
+    private fun getPostData() =
         liveData(Dispatchers.IO, Constants.MAX_TIME) {
             emit(Resource.loading(data = null))
             try {
@@ -37,6 +41,47 @@ class PostViewModel(private val mainRepository: MainRepository) : ViewModel() {
                 )
             }
         }
+
+
+    fun setupObserversGetPost(mainActivity: MainActivity) {
+        getPostData().observeForever {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        mainActivity.hideShimmer()
+                        resource.data?.let { response ->
+                            try {
+                                if (!TextUtils.isEmpty(response.s.toString())) {
+                                    if (response.s == 200) {
+                                        mainActivity.afterResponse(response)
+                                    } else {
+                                        Utils.showToast(
+                                            mainActivity,
+                                            mainActivity.resources.getString(R.string.ops_something_went_wrong)
+                                        )
+                                    }
+                                }
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+                    }
+
+                    Status.ERROR -> {
+                        mainActivity.hideShimmer()
+                        Utils.showToast(
+                            mainActivity,
+                            mainActivity.resources.getString(R.string.ops_something_went_wrong)
+                        )
+                    }
+
+                    Status.LOADING -> {
+                        mainActivity.showShimmer()
+                    }
+                }
+            }
+        }
+    }
 
     private fun getPostParam(): JsonObject {
         val jsonObject = JsonObject()

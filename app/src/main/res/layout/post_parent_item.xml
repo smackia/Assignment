@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp20">
+
+
+    <LinearLayout
+        android:id="@+id/ll_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp20"
+        android:weightSum="1">
+
+        <com.example.assignment.ui.main.customview.RTV
+            android:id="@+id/tv_post_tag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_size_14" />
+
+        <com.example.assignment.ui.main.customview.RTV
+            android:id="@+id/tv_see_all"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_weight="0.5"
+            android:gravity="end"
+            android:text="@string/see_all"
+            android:textColor="@color/green"
+            android:textSize="@dimen/txt_size_14" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_tag"
+        android:layout_marginTop="@dimen/dp20"
+        android:nestedScrollingEnabled="false"
+        android:overScrollMode="never" />
+
+    <View
+        android:id="@+id/vv"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/rv_child"
+        android:layout_marginTop="@dimen/dp20"
+        android:background="@color/gray" />
+
+</RelativeLayout>

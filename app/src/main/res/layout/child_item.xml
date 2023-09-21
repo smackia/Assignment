@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/dp200"
+    android:layout_height="@dimen/dp300"
+    android:layout_marginEnd="@dimen/dp20"
+    android:background="@color/o_black">
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_thumbnail"
+        android:layout_width="@dimen/dp200"
+        android:layout_height="@dimen/dp200"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:strokeColor="@null"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_thumbnail"
+        android:layout_marginTop="@dimen/dp20"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp20"
+                android:layout_weight=".10"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:strokeColor="@null"
+                tools:ignore="ContentDescription" />
+
+            <com.example.assignment.ui.main.customview.RTV
+                android:id="@+id/tv_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp2"
+                android:layout_weight=".90"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txt_size_14" />
+
+
+        </LinearLayout>
+
+        <com.example.assignment.ui.main.customview.RTV
+            android:id="@+id/tv_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_size_14" />
+
+
+        <com.example.assignment.ui.main.customview.RTV
+            android:id="@+id/tv_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp2"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/txt_size_14" />
+
+    </LinearLayout>
+
+</RelativeLayout>
